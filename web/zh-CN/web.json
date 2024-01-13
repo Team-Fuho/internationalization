@@ -1,0 +1,20 @@
+{
+  "comm": {
+    "form_r1": "名字",
+    "form_r4": "号码",
+    "form_q4_pc": "/10点"
+  },
+  "article": {},
+  "glob": {
+    "tfh_vn": "Team Fuho Vietnam",
+    "nav_info": "介绍",
+    "nav_down": "下载"
+  },
+  "index": {},
+  "info": {},
+  "404": {},
+  "news": {},
+  "dl": {},
+  "langsel": {},
+  "gallery": {}
+}
