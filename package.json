@@ -1,6 +1,6 @@
 {
   "name": "@team-fuho/i18n",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Translations repository created by Weblate\r ==========================================",
   "main": "index.js",
   "scripts": {
