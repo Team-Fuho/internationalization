@@ -1,0 +1,50 @@
+name: Bump version and Publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: 'Automated Version Bump'
+        uses: 'florian-h05/gh-action-advanced-bump-version@main'
+        id: version-bump
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          major-wording: 'major,Major,breaking,Breaking'
+          minor-wording: 'minor,Minor,add,Add,adds,Adds,new,New'
+          patch-wording: 'fix,Fix,fixes,Fixes,patch,Patch'
+          rc-wording: 'rc,pre'
+          hours-to-go-back: 24
+          skip-if-no-commits: 'true'
+          tag-prefix: 'v'
+          commit-message: 'bump: i18n->{{version}} [skip ci]'
+          bump-policy: 'last-commit'
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+
+      - name: Publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
